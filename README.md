@@ -1,23 +1,9 @@
-## 📥 Download Dataset
-
-To run this notebook, download the dataset manually from the following link:
-👉 [German Traffic Sign Dataset (GTSRB)](https://benchmark.ini.rub.de/gtsrb_news.html)
-
-Once downloaded, place it in the project root under the folder `dataset/`.
-
-
-
-
-Great! I see you've uploaded your notebook: **`traffic sign classification final.ipynb`**. Based on that file, I’ll now generate a professional `README.md` suitable for your project.
-
----
-
-## 📘 README.md — *Traffic Sign Classification using CNN*
-
 ```markdown
 # 🚦 Traffic Sign Classification using CNN
 
 This project is a deep learning-based Traffic Sign Classification system implemented in Python using Keras and TensorFlow. It leverages a Convolutional Neural Network (CNN) to accurately classify traffic signs into 43 different categories, making it suitable for autonomous driving applications, educational demonstrations, or as a base for further research.
+
+---
 
 ## 📂 Project Structure
 
@@ -26,10 +12,13 @@ This project is a deep learning-based Traffic Sign Classification system impleme
 traffic-sign-classification/
 │
 ├── traffic sign classification final.ipynb  # Jupyter Notebook with full code
+├── requirements.txt                         # Python dependencies
 ├── README.md                                # Project documentation (this file)
 └── dataset/                                 # Directory with training and testing images (not included here)
 
-````
+```
+
+---
 
 ## 🧠 Model Summary
 
@@ -39,82 +28,106 @@ traffic-sign-classification/
 - **Training Accuracy:** ~99%
 - **Test Accuracy:** ~95%+
 
+---
+
 ## 🛠️ Features
 
 - Data loading and preprocessing (image resizing, normalization)
-- Dynamic model architecture with Conv2D, MaxPooling, Dropout, and Dense layers
+- CNN model architecture with Conv2D, MaxPooling2D, Dropout, and Dense layers
 - Training with validation
 - Evaluation on unseen test data
-- Real-time prediction from custom uploaded images
-- Visualization of performance using accuracy and loss plots
+- Real-time prediction for custom images
+- Performance visualization using plots
+
+---
 
 ## 📊 Dataset
 
 - **Source:** [German Traffic Sign Recognition Benchmark (GTSRB)](https://benchmark.ini.rub.de/gtsrb_news.html)
 - **Total Images:** Over 50,000 labeled images
-- **Classes:** 43 traffic sign classes
+- **Classes:** 43 different traffic signs
+
+---
+
+## 📥 Download Dataset
+
+To run this notebook, you need to manually download the dataset from the official source:
+
+👉 **[Download GTSRB Dataset](https://benchmark.ini.rub.de/Dataset_GTSRB.html)**
+
+After downloading, extract and place the dataset in a folder named `dataset/` inside the project directory.
+
+```
+
+traffic-sign-classification/
+└── dataset/
+├── Train/
+└── Test/
+
+````
+
+---
 
 ## 🚀 How to Run
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/traffic-sign-classification.git
-cd traffic-sign-classification
+git clone https://github.com/yousseifmustafa/Traffic-Sign-Recognition-and-Classification.git
+cd Traffic-Sign-Recognition-and-Classification
 ````
 
 ### 2. Install Requirements
 
-You can use Anaconda or pip to create the environment.
+Create a virtual environment and install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Basic required libraries:
-
-```txt
-tensorflow
-keras
-numpy
-matplotlib
-pandas
-scikit-learn
-opencv-python
-```
+> ✅ Compatible with Python 3.7+
 
 ### 3. Run the Notebook
-
-Launch Jupyter Notebook or any compatible environment:
 
 ```bash
 jupyter notebook "traffic sign classification final.ipynb"
 ```
 
-Ensure the `dataset/` directory (with proper structure) is in the same folder.
+---
 
 ## 🧪 Example Prediction
 
-After training, you can upload a custom traffic sign image and use the model to predict the class. The image is resized to 30x30 and passed to the trained model.
+After training the model, you can upload any traffic sign image, and the model will predict the corresponding class. The image is preprocessed and resized to 30x30 before prediction.
+
+---
 
 ## 📈 Evaluation Metrics
 
-* **Accuracy**
-* **Loss**
-* **Confusion Matrix**
-* **Precision / Recall (optional)**
+* Accuracy
+* Loss
+* Confusion Matrix
+* (Optional) Precision / Recall
+
+---
 
 ## 📷 Visualization
 
-The notebook includes plots for:
+The notebook includes visualizations of:
 
 * Training vs Validation Accuracy
 * Training vs Validation Loss
 
+---
+
 ## ✅ Future Improvements
 
 * Use data augmentation for better generalization
-* Apply Transfer Learning using pre-trained CNNs (e.g., MobileNet, ResNet)
-* Create a web app or Android app for real-time classification
-* Add bounding box detection before classification
+* Apply Transfer Learning (e.g., MobileNet, ResNet)
+* Build a web or mobile app for real-time classification
+* Add object detection (bounding box) support
 
+---
+
+**Made with ❤️ by [Yousseif Mustafa](https://github.com/yousseifmustafa)**
+
+````
