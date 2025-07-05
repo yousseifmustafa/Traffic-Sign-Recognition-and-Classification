@@ -1,3 +1,13 @@
+## 📥 Download Dataset
+
+To run this notebook, download the dataset manually from the following link:
+👉 [German Traffic Sign Dataset (GTSRB)](https://benchmark.ini.rub.de/gtsrb_news.html)
+
+Once downloaded, place it in the project root under the folder `dataset/`.
+
+
+
+
 Great! I see you've uploaded your notebook: **`traffic sign classification final.ipynb`**. Based on that file, I’ll now generate a professional `README.md` suitable for your project.
 
 ---
