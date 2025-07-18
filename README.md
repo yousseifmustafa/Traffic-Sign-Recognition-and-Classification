@@ -2,7 +2,14 @@
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)
 ![Pandas](https://img.shields.io/badge/Pandas-Data%20Science-yellow?logo=pandas)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-Deep%20Learning-orange?logo=tensorflow)
+![Keras](https://img.shields.io/badge/Keras-CNN-red?logo=keras)
+![OpenCV](https://img.shields.io/badge/OpenCV-Image%20Processing-lightgrey?logo=opencv)
+![NumPy](https://img.shields.io/badge/NumPy-Numerical%20Computing-informational?logo=numpy)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-Visualization-blueviolet?logo=matplotlib)
 ![Status](https://img.shields.io/badge/Project-Completed-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+![Classes](https://img.shields.io/badge/Classes-43-blue)
 
 
 ## 🧠 Overview
