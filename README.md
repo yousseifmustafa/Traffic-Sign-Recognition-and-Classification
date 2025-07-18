@@ -137,4 +137,3 @@ Upload a traffic sign image and the trained model will:
 Made with ❤️ by [Yousseif Mustafa](https://github.com/yousseifmustafa)
 
 ```
-
