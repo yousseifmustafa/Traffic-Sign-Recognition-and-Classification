@@ -1,14 +1,9 @@
+# 🚦 Traffic Sign Classification using CNN
 
-```markdown
-<h1 align="center">🚦 Traffic Sign Classification using CNN</h1>
+![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Science-yellow?logo=pandas)
+![Status](https://img.shields.io/badge/Project-Completed-brightgreen)
 
-<p align="center">
-  A deep learning project to classify traffic signs using Convolutional Neural Networks (CNNs).<br>
-  Built with <strong>Python, TensorFlow, and Keras</strong>. <br>
-  Ideal for autonomous driving, academic research, or ML demonstrations.
-</p>
-
----
 
 ## 🧠 Overview
 
