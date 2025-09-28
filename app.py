@@ -15,7 +15,7 @@ def load_traffic_model():
     """
     try:
         # تأكد من أن المسار صحيح بالنسبة لمكان تشغيل التطبيق
-        model = tf.keras.models.load_model("./trained_model/traffic_classifier_v4.h5")
+        model = tf.keras.models.load_model("./trained_model/best_model.h5")
         return model
     except Exception as e:
         st.error(f"حدث خطأ أثناء تحميل الموديل: {e}")
