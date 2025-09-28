@@ -4,22 +4,24 @@ import streamlit as st
 import tensorflow as tf
 from PIL import Image
 import numpy as np
-from io import BytesIO
 
-# --- Configuration & Model Loading ---
+# --- 1. الإعدادات وتحميل الموديل ---
 
-# Use st.cache_resource for efficient model loading (loads only once)
+# استخدام الكاش لضمان تحميل الموديل مرة واحدة فقط بكفاءة
 @st.cache_resource
-def load_tf_model():
-    """Loads the pre-trained Keras model."""
+def load_traffic_model():
+    """
+    يقوم بتحميل الموديل المدرب مسبقًا.
+    """
     try:
-        model = tf.keras.models.load_model("./best_model.h5")
+        # تأكد من أن المسار صحيح بالنسبة لمكان تشغيل التطبيق
+        model = tf.keras.models.load_model("./trained_model/traffic_classifier_v4.h5")
         return model
     except Exception as e:
-        st.error(f"Error loading model: {e}")
+        st.error(f"حدث خطأ أثناء تحميل الموديل: {e}")
         return None
 
-# Dictionary to map class indices to their names
+# قاموس لأسماء الفئات (Classes)
 CLASSES = {
     0: 'Speed Limit 20 km/h', 1: 'Speed Limit 30 km/h', 2: 'Speed Limit 50 km/h', 3: 'Speed Limit 60 km/h',
     4: 'Speed Limit 70 km/h', 5: 'Speed Limit 80 km/h', 6: 'End of Speed Limit 80 km/h', 7: 'Speed Limit 100 km/h',
@@ -35,109 +37,93 @@ CLASSES = {
     41: 'End of No Passing', 42: 'End of No Passing by Trucks',
 }
 
-# --- Image Processing & Prediction Functions ---
+# --- 2. دوال معالجة الصورة والتنبؤ ---
 
 def preprocess_image(image: Image.Image) -> np.ndarray:
-    """Preprocesses the image for the model."""
+    """
+    تقوم بمعالجة الصورة لتكون جاهزة للموديل.
+    """
     img = image.resize((30, 30))
-    img = np.array(img)
-    # Ensure image has 3 channels (RGB)
-    if img.ndim == 2:  # Grayscale
-        img = np.stack((img,) * 3, axis=-1)
-    if img.shape[-1] == 4:  # RGBA
-        img = img[:, :, :3]
-    # Add batch dimension
-    img = np.expand_dims(img, axis=0)
-    return img
+    img_array = np.array(img)
+    # التأكد من أن الصورة لديها 3 قنوات لونية (RGB)
+    if img_array.ndim == 2: # لو كانت الصورة رمادية
+        img_array = np.stack((img_array,) * 3, axis=-1)
+    if img_array.shape[-1] == 4: # لو كانت الصورة بها قناة شفافية (RGBA)
+        img_array = img_array[:, :, :3]
+    # إضافة بعد إضافي للـ batch
+    img_array = np.expand_dims(img_array, axis=0)
+    return img_array
 
 def predict(model: tf.keras.Model, image: Image.Image) -> tuple[int, float]:
-    """Makes a prediction using the loaded model."""
+    """
+    تقوم بعمل تنبؤ باستخدام الموديل المحمل.
+    """
     processed_img = preprocess_image(image)
     prediction = model.predict(processed_img)
     class_index = int(np.argmax(prediction))
     confidence = float(np.max(prediction))
     return class_index, confidence
 
-# --- Streamlit User Interface ---
+# --- 3. واجهة المستخدم (Streamlit UI) ---
 
-# Set page configuration
+# إعدادات الصفحة
 st.set_page_config(page_title="Traffic Sign Classifier", page_icon="🚦", layout="wide")
 
-# Custom CSS for better styling
+# تصميم الواجهة باستخدام CSS
 st.markdown("""
 <style>
-    .main-header {
-        font-size: 2.5rem;
-        color: #4B4B4B;
-        text-align: center;
-        font-weight: bold;
-    }
-    .sub-header {
-        text-align: center;
-        color: #808080;
-    }
-    .result-box {
-        background-color: #F0F2F6;
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-    }
-    .result-text {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #1E88E5;
-    }
-    .confidence-text {
-        font-size: 1.1rem;
-        color: #555;
-    }
+    .main-header { font-size: 2.5rem; color: #4B4B4B; text-align: center; font-weight: bold; }
+    .sub-header { text-align: center; color: #808080; }
+    .result-box { background-color: #F0F2F6; padding: 25px; border-radius: 10px; text-align: center; }
+    .result-text { font-size: 1.8rem; font-weight: bold; color: #1E88E5; }
+    .confidence-text { font-size: 1.2rem; color: #555; }
 </style>
 """, unsafe_allow_html=True)
 
-# App Header
+# عنوان التطبيق
 st.markdown('<p class="main-header">Traffic Sign Classifier 🚦</p>', unsafe_allow_html=True)
-st.markdown('<p class="sub-header">An AI-powered application to identify traffic signs from your images.</p>', unsafe_allow_html=True)
+st.markdown('<p class="sub-header">تطبيق ذكاء اصطناعي للتعرف على إشارات المرور من الصور.</p>', unsafe_allow_html=True)
 st.markdown("---")
 
-# Load the model
-model = load_tf_model()
+# تحميل الموديل
+model = load_traffic_model()
 
+# التأكد من أن الموديل تم تحميله بنجاح
 if model:
-    # File uploader
+    # أداة رفع الملفات
     uploaded_file = st.file_uploader(
-        "Choose a traffic sign image...",
+        "اختر صورة إشارة مرور...",
         type=["jpg", "jpeg", "png"]
     )
 
     if uploaded_file is None:
-        # Initial state message
-        st.info("👋 Welcome! Please upload an image to get started.")
+        st.info("👋 مرحبًا! من فضلك ارفع صورة للبدء.")
     else:
-        # Process the uploaded file
         image = Image.open(uploaded_file)
         
-        # Create two columns for layout
+        # تقسيم الشاشة لعمودين
         col1, col2 = st.columns(2)
         
         with col1:
-            st.image(image, caption="Uploaded Image", use_column_width=True)
+            st.image(image, caption="الصورة التي تم رفعها", use_column_width=True)
         
         with col2:
-            # Get prediction
-            class_index, confidence = predict(model, image)
-            class_name = CLASSES.get(class_index, "Unknown Sign")
+            with st.spinner("جاري التحليل..."):
+                # الحصول على التنبؤ
+                class_index, confidence = predict(model, image)
+                class_name = CLASSES.get(class_index, "إشارة غير معروفة")
 
-            # Display the result in a styled box
-            st.markdown('<div class="result-box">', unsafe_allow_html=True)
-            st.markdown('<h3>Prediction Result</h3>', unsafe_allow_html=True)
-            st.markdown(f'<p class="result-text">{class_name}</p>', unsafe_allow_html=True)
-            st.markdown(f'<p class="confidence-text">Confidence: {confidence*100:.2f}%</p>', unsafe_allow_html=True)
-            st.progress(confidence)
-            st.markdown('</div>', unsafe_allow_html=True)
+                # عرض النتيجة في صندوق منسق
+                st.markdown('<div class="result-box">', unsafe_allow_html=True)
+                st.markdown('<h3>النتيجة</h3>', unsafe_allow_html=True)
+                st.markdown(f'<p class="result-text">{class_name}</p>', unsafe_allow_html=True)
+                st.markdown(f'<p class="confidence-text">نسبة الثقة: {confidence*100:.2f}%</p>', unsafe_allow_html=True)
+                st.progress(confidence)
+                st.markdown('</div>', unsafe_allow_html=True)
 else:
-    st.error("Model could not be loaded. Please ensure the model file is in the correct directory.")
+    st.error("لم يتم تحميل الموديل. تأكد من وجود ملف الموديل في المجلد الصحيح.")
 
-# Footer
+# الجزء السفلي من الصفحة
 st.markdown("---")
 st.markdown(
     '<div style="text-align: center; color: grey;">'
