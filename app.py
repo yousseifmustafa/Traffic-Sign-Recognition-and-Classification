@@ -13,7 +13,7 @@ from io import BytesIO
 def load_tf_model():
     """Loads the pre-trained Keras model."""
     try:
-        model = tf.keras.models.load_model("./trained_model/traffic_classifier_v4.h5")
+        model = tf.keras.models.load_model("./best_model.h5")
         return model
     except Exception as e:
         st.error(f"Error loading model: {e}")
