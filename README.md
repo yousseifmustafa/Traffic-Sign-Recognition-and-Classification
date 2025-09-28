@@ -10,6 +10,21 @@
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 ![Classes](https://img.shields.io/badge/Classes-43-blue)
 
+## Project Structure 
+```mermaid
+graph TD
+    A([Start]) --> B["Step 1: Import Libraries <br> (TensorFlow, NumPy, Pandas, Sklearn)"];
+    B --> C["Step 2: Load & Preprocess Training Data <br> (Read all images, resize to 30x30, normalize pixel values)"];
+    C --> D["Step 3: Split Data & Encode Labels <br> (Use train_test_split and one-hot encode labels)"];
+    D --> E["Step 4: Define CNN Model Architecture <br> (Sequential model with Conv2D, MaxPool, Dropout, and Dense layers)"];
+    E --> F["Step 5: Set Up Training Enhancements <br> (Configure ImageDataGenerator for augmentation and Callbacks like EarlyStopping)"];
+    F --> G["Step 6: Train the CNN Model <br> (Execute model.fit using the augmented data)"];
+    G --> H["Step 7: Visualize Training Performance <br> (Plot graphs for training & validation accuracy and loss)"];
+    H --> I["Step 8: Evaluate Model on Test Data <br> (Predict on test set, generate Confusion Matrix & Classification Report)"];
+    I --> J["Step 9: Save the Final Trained Model <br> (model.save)"];
+    J --> K([End]);
+
+```
 
 ## 🧠 Overview
 
