@@ -153,8 +153,7 @@ Upload a traffic sign image and the trained model will:
 
 ---
 
-## 🙋‍♂️ Author
-
-Made with ❤️ by [Yousseif Mustafa](https://github.com/yousseifmustafa)
-
+<div align="right">
+    Made with ❤️ by <a href="https://github.com/yousseifmustafa">Yousseif Mustafa</a>
+</div>
 
