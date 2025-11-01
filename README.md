@@ -151,7 +151,7 @@ Upload a traffic sign image and the trained model will:
 * Web/mobile app integration for real-time use
 * Add object detection with bounding boxes
 
----
+
 
 <div align="right">
     Made with ❤️ by <a href="https://github.com/yousseifmustafa">Yousseif Mustafa</a>
